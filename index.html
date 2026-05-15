@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chain Reactor - Hacker++ Mode</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div id="home-screen" class="screen">
+        <h1 class="main-title">CHAIN RXN.</h1>
+        <div class="menu-buttons">
+            <button id="btn-rules" class="menu-btn outline-btn">Rules & Instructions</button>
+            <button id="btn-settings" class="menu-btn outline-btn">Customize Board</button>
+            <button id="btn-1p" class="menu-btn" style="background-color: #ff0000;">1 Player (Vs Bot)</button>
+            <button id="btn-2p" class="menu-btn">2 Players</button>
+            <button id="btn-3p" class="menu-btn">3 Players</button>
+            <button id="btn-4p" class="menu-btn">4 Players</button>
+        </div>
+    </div>
+
+    <div id="bot-modal" class="modal hidden">
+        <div class="modal-content" style="text-align: center;">
+            <h2>SELECT AI DIFFICULTY</h2>
+            <div class="menu-buttons" style="margin: 0 auto; margin-top: 20px;">
+                <button id="btn-bot-easy" class="menu-btn" style="background-color: #00cc00;">EASY (Random)</button>
+                <button id="btn-bot-hard" class="menu-btn" style="background-color: #ff0000;">HARD (Tactical)</button>
+                <button id="close-bot-btn" class="menu-btn outline-btn" style="margin-top: 10px;">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="settings-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>CUSTOMIZE BOARD</h2>
+            <div class="settings-group">
+                <label>Columns (Width): <span id="col-val" class="p3-text">6</span></label>
+                <input type="range" id="input-cols" min="6" max="10" value="6">
+            </div>
+            <div class="settings-group">
+                <label>Rows (Height): <span id="row-val" class="p3-text">12</span></label>
+                <input type="range" id="input-rows" min="8" max="12" value="12">
+            </div>
+            <p style="font-size: 13px; margin-bottom: 20px; opacity: 0.7;">Note: Board adjustments change choke-points and capacity thresholds!</p>
+            <button id="close-settings-btn" class="menu-btn outline-btn">Save & Close</button>
+        </div>
+    </div>
+
+    <div id="rules-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2>HOW TO PLAY</h2>
+            <ul class="rules-list">
+                <li><strong>Turn 1:</strong> You must click an EMPTY cell.</li>
+                <li><strong>Next Turns:</strong> You can only click YOUR OWN cells to add 1 orb.</li>
+                <li><strong>Capacity:</strong> Corners hold 1, Edges hold 2, Center cells hold 3.</li>
+                <li><strong>Explosions:</strong> Hitting capacity causes the cell to explode!</li>
+                <li><strong>Hacker Portals:</strong> Cyan cells warp orbs to the Black Hole.</li>
+                <li><strong>The Time Bomb:</strong> Detonates after 1 round, firing an EMP cross.</li>
+                <li><strong>Time Machine:</strong> Use the Left/Right arrows to rewrite history during the game, or replay it after!</li>
+            </ul>
+            <button id="close-rules-btn" class="menu-btn outline-btn">Close</button>
+        </div>
+    </div>
+
+    <div id="game-screen" class="screen hidden">
+        <header id="game-bar" class="game-bar">
+            <div class="bar-left">
+                <button id="btn-back-menu" class="back-btn">← MENU</button>
+            </div>
+            
+            <div class="bar-center">
+                <span id="turn-indicator" class="p1-text">RED Player's Turn</span>
+                <button id="btn-nuke" class="nuke-btn">PLANT BOMB (1)</button>
+            </div>
+            
+            <div class="bar-right">
+                <span>TIME <span id="game-timer">05:00</span></span>
+                <span>TURN <span id="turn-timer">15s</span></span>
+                
+                <span class="p1-text score-block" id="score-block-p1">RED <span id="p1-score">0</span></span>
+                <span class="p2-text score-block" id="score-block-p2">BLU <span id="p2-score">0</span></span>
+                <span class="p3-text score-block" id="score-block-p3">GRN <span id="p3-score">0</span></span>
+                <span class="p4-text score-block" id="score-block-p4">YLW <span id="p4-score">0</span></span>
+            </div>
+        </header>
+
+        <div id="game-layout">
+            <div id="game-container">
+                <main id="board" class="board"></main>
+                <div class="post-game-controls">
+                    <button id="play-again-btn" class="hidden">Play Again</button>
+                    <button id="game-history-btn" class="hidden">View Game History</button>
+                </div>
+            </div>
+            
+            <aside id="command-center">
+                <div class="panel leaderboard-panel">
+                    <h3>LEADERBOARD</h3>
+                    <ul id="leaderboard-list"></ul>
+                </div>
+                
+                <div class="panel time-panel">
+                    <h3>TIME MACHINE</h3>
+                    <div class="time-controls">
+                        <button id="btn-prev" class="time-btn" disabled>&#8592;</button>
+                        <button id="btn-next" class="time-btn" disabled>&#8594;</button>
+                    </div>
+                </div>
+            </aside>
+        </div>
+    </div>
+
+<script src="app.js"></script>
+</body>
+</html>
